@@ -6,13 +6,13 @@ echo "<html><body><h1>Hi there NTI 300</h1><br />
 </body></html>" > /var/www/html/index.html                                                      # create custom welcome page
 echo "<html><body><h1>You made it to my page 2</h1></body></html>" > /var/www/html/page2.html   # create custom page2
 
-touch /var/www/html/.htpasswd                                                                   # create the password file
+# touch /var/www/html/.htpasswd                                                                   # create the password file
 
 echo '                                                                                              
 thom:$apr1$fEy2hp9s$TMQCOlvtGZcoGvwbPEIdL/
 nicole:$apr1$PUSCxuzg$aeA7lWE6hhtDt9T9QrePy0 ' > /var/www/html/.htpasswd                        # create users
 
-touch > /var/www/html/.htaccess                                                                 # create htaccess file
+# touch > /var/www/html/.htaccess                                                                 # create htaccess file
 
 echo '
 AuthType Basic
