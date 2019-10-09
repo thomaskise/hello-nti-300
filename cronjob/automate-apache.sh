@@ -1,18 +1,19 @@
-# installs
-yum -y install httpd mod_ssl                                                                               # install apache and SSL support
-yum install wget  -y                                                                                       # install wget - assume 'yes'
+#! /bin/bash
+
+yum -y install httpd mod_ssl                                                                           # install apache and SSL support
+yum -y install wget                                                                                    # install wget - assume 'yes'
 
 # set-up cron job
-wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-cronjob.sh         # get cronjob script from github
-chmod +x automate-cronjob.sh                                                                               # make script executable
-./automate-cronjob.sh                                                                                      # run the script
-rm automate-cronjob.sh                                                                                     # delete the script
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-cronjob.sh     # get cronjob script from github
+chmod +x automate-cronjob.sh                                                                           # make script executable
+./automate-cronjob.sh                                                                                  # run the script
+rm -f automate-cronjob.sh                                                                              # delete the script
 
 # set up the index page and start apache
-wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-indexpage.sh       # get cronjob script from github
-chmod +x indexpage.sh                                                                                      # make script executable
-./automate-indexpage.sh                                                                                    # run the script
-rm automate-indexpage.sh                                                                                   # delete the script
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-indexpage.sh   # get cronjob script from github
+chmod +x automate-indexpage.sh                                                                         # make script executable
+./automate-indexpage.sh                                                                                # run the script
+rm -f automate-indexpage.sh                                                                            # delete the script
 
-
-systemctl start httpd                                                                                      # start apache
+systemctl restart httpd                                                                                # restart apache (jic)
+chmod +x updating_webpage.sh                                                                           # reapply permissions because environment is coming up with them not established
