@@ -8,6 +8,3 @@ wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/a
 chmod +x automate-apache.sh                                                                           # make script executable
 ./automate-apache.sh                                                                                  # run the script
 rm -f automate-apache.sh                                                                              # delete the script
-
-systemctl restart httpd                                                                                # restart apache (jic)
-chmod +x updating_webpage.sh                                                                           # reapply permissions because environment is coming up with them not established
