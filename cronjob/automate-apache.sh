@@ -13,4 +13,4 @@ chmod +x automate-indexpage.sh                                                  
 rm -f automate-indexpage.sh                                                                            # delete the script
 
 systemctl restart httpd                                                                                # restart apache
-chmod +x updating_webpage.sh                                                                      # reapply permissions because environment is coming up with them not established
+chmod +x /root/updating_webpage.sh                                                                      # reapply permissions because environment is coming up with them not established
