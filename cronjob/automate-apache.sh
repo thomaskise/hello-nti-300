@@ -1,8 +1,5 @@
 #! /bin/bash
 
-yum -y install httpd mod_ssl                                                                           # install apache and SSL support
-yum -y install wget                                                                                    # install wget - assume 'yes'
-
 # set-up cron job
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-cronjob.sh     # get cronjob script from github
 chmod +x automate-cronjob.sh                                                                           # make script executable

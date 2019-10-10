@@ -8,4 +8,4 @@
 # │ │ │ │ │
 # * * * * * command to execute
 */1 * * * * /bin/echo "I'm running updating_webpage.sh" | logger                      # enter log every minutes
-*/1 * * * * /root/updating_webpage.sh                                                 # run job every minutes
+*/1 * * * * sh ./root/updating_webpage.sh                                             # run job every minutes
