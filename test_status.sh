@@ -4,9 +4,9 @@ if [ -z "$1" ]; then    # check to see if the var is set
 	exit 0;
 fi
 
-varname=$( systemctl status $1 | grep Active | awk ‘{print $2}’); 
-varname2="inactive"; 
+status=$( systemctl status $1 | grep Active | awk ‘{print $2}’); 
+inactive="inactive"; 
 
-if [ $varname == $varname2 ]; then 
+if [ $status == $inactive ]; then 
   echo "Nooooooo! it is off"; 
 fi
