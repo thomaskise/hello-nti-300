@@ -1,3 +1,8 @@
+#!/bin/bash
+if [ -e /usr/sbin/httpd ]; then                                                                 # check to see if httpd has already been installled
+   exit 0;                                                                                      # exit if it has, because the environment is already installed
+fi
+
 yum -y install httpd mod_ssl                                                                    # install apache and SSL support
 systemctl start httpd                                                                           # start apache
 sed -i 's/^/#/g' /etc/httpd/conf.d/welcome.conf                                                 # comment out the welcome page
