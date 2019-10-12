@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -e /usr/bin/wget ]; then 
+if [ -e /usr/bin/vim ]; then 
   exit 0; 
 fi
 
@@ -10,3 +10,5 @@ wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/packages.
 for packages in ($(cat /etc/packages.txt); do 
   yum -y install $packages;
 done
+
+rm -f packages.txt
