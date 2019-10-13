@@ -8,3 +8,5 @@ wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/startup/a
 chmod +x automate-apache.sh                                                                           # make script executable
 ./automate-apache.sh                                                                                  # run the script
 rm -f automate-apache.sh                                                                              # delete the script
+
+systemctl start httpd

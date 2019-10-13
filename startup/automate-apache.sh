@@ -7,7 +7,7 @@ chmod +x automate-cronjob.sh                                                    
 rm -f automate-cronjob.sh                                                                              # delete the script
 
 # set up the index page and start apache
-wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/pages/automate-indexpage.sh     # get indexpage script from github
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/pagecontrols/automate-indexpage.sh     # get indexpage script from github
 chmod +x automate-indexpage.sh                                                                         # make script executable
 ./automate-indexpage.sh                                                                                # run the script
 rm -f automate-indexpage.sh                                                                            # delete the script
