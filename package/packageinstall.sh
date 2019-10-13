@@ -5,7 +5,7 @@ fi
 
 yum -y install wget
 
-wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/packages.txt
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/package/packages.txt
 
 for packages in ($(cat /etc/packages.txt); do 
   yum -y install $packages;

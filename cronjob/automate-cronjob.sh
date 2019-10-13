@@ -3,7 +3,7 @@
 # add cronjob script
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/updating_webpage.sh         # get updating_webpage.sh file from github
 mv -f updating_webpage.sh /root/updating_webpage.sh                                                        # move updating_webpage.sh file to the proper directory
-chmod +x updating_webpage.sh                                                                               # make script executable
+chmod +x /root/updating_webpage.sh                                                                               # make script executable
 
 # add crontab
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/crontab                     # get crontab file from github
