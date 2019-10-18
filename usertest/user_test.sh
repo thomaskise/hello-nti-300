@@ -9,7 +9,7 @@ input="$1";
 
 # parse argument place in var
 
-test_package=$(yum search installed | grep "$input" ) 
+test_package=$( yum search installed "$input" | grep "$input"  ) 
 
 if [ -z "$test_package"]; then #my comment here
   echo $input "package is not installed"              #prompt for input
