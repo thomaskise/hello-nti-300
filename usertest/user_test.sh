@@ -20,7 +20,7 @@ fi                      # closes the if statment
 status=$(systemctl status $input | grep Active | awk '{print $2}')
 inactive="inactive"
 
-if [ $status == $inactive ]; then
+if [ "$status" == "$inactive" ]; then
    echo "noooooooooo it is off"
    read -p "Do you want to turn is on? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 0
    systemctl start $input
