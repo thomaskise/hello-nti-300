@@ -13,4 +13,4 @@ for packages in ($(cat /etc/packages.txt); do
   yum -y install $packages;
 done
 
-rm -f packages.txt
+rm -f /etc/packages.txt
