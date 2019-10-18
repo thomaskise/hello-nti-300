@@ -12,7 +12,7 @@ input="$1";
 test_package=$(yum search installed | grep "$input" ) 
 
 if [ -z "$test_package"]; then #my comment here
-  echo "Package is not installed"           ;    #prompt for input
+  echo $input "Package is not installed"              #prompt for input
   exit 0;
 else 
   echo "Package is installed";
