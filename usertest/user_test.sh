@@ -5,9 +5,8 @@ if [ -z "$1" ] ; then
   exit 0;
 fi
 
-input="$1";
-
-# parse argument place in var
+for input in "$@"
+do
 
 test_package=$( yum search installed "$input" | grep "$input"  ) 
 
@@ -31,4 +30,4 @@ else
    echo "All is good"
 fi
 
-
+done
