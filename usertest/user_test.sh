@@ -12,11 +12,11 @@ input="$1";
 test_package=$(yum search installed | grep "$input" ) 
 
 if [ -z "$test_package"]; then #my comment here
-  echo $input "package is installed"                  
-else 
   echo $input "package is not installed"              #prompt for input
   read -p "Install? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 0
-  yum -y install $input
+  yum -y install $input                  
+else 
+  echo $input "package is not installed"              #prompt for input
 fi                      # closes the if statment
 
 
