@@ -1,5 +1,5 @@
 #!/bin/bash
-:'
+: '
 start_mail.sh version 1.0
 
 This script will start an email to everyone logged on the the server
