@@ -7,5 +7,5 @@
 # │ │ │ │ │
 # │ │ │ │ │
 # * * * * * command to execute
-15 * * * * /bin/echo "I'm running updating_webpage.sh" | logger                      # enter log every 15 minutes
-15 * * * * /root/updating_webpage.sh                                                 # run job every 15 minutes
+*/15 * * * * /bin/echo "I'm running updating_webpage.sh" | logger                      # enter log every 15 minutes
+*/15 * * * * /root/updating_webpage.sh                                                 # run job every 15 minutes
