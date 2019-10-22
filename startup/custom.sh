@@ -14,8 +14,6 @@ field="f1"                                          # assign var for field
 mail $($filename | cut -d' ' -$field)               # output the text for the requested field
 }
 
-
-
 # function lsd provides a directory listing 
 # given an input date formatted mmm d, a date column number and a  filename column number
 function lsd

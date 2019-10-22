@@ -17,3 +17,9 @@ wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/github/au
 chmod +x automate-github.sh                                                                            # make script executable
 ./automate-github.sh                                                                                   # run the script
 rm -f automate-github.sh                                                                               # delete the script
+
+# set up git and clone the repo
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/startup/custom.sh               # get custom.sh script from github
+mv custom.sh  /etc/profile.d/custom.sh                                                                 # move custom.sh to where it will be executed during startup
+
+yum -y install httpd mod_ssl                                                                           # install apache and SSL support

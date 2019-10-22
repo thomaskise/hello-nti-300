@@ -1,6 +1,6 @@
 #! /bin/bash
 
-yum -y install httpd mod_ssl                                                                           # install apache and SSL support
+#yum -y install httpd mod_ssl                                                                           # install apache and SSL support
 yum -y install wget                                                                                    # install wget - assume 'yes'
 
 # set-up cron job
