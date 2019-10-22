@@ -5,8 +5,9 @@ if [ -e /bin/git ]; then                                                   # che
 fi
 
 yum -y install git;                                                        # install git
+mkdir /repos                                                               # make a directory to store repos
+cd /repos                                                                  # change to the repo directory
 git config --global user.name "Duck9000"                                   # update global user name
 git config --global user.email thomas.harrington@seattlecentral.edu        # update global email address
-mkdir /repos                                                               # make a directory to store repos
 git clone https://github.com/thomaskise/hello-nti-300.git  /repos          # clone hello-nti-300 
 
