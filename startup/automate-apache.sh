@@ -21,5 +21,5 @@ rm -f automate-github.sh                                                        
 # set up git and clone the repo
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/startup/custom.sh               # get custom.sh script from github
 mv custom.sh  /etc/profile.d/custom.sh                                                                 # move custom.sh to where it will be executed during startup
-
-yum -y install httpd mod_ssl                                                                           # install apache and SSL support
+chmod +x /etc/profile.d/custom.sh                                                                      # make script executable
+./etc/profile.d/custom.sh                                                                              # run the script
