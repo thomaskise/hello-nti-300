@@ -1,6 +1,5 @@
 #!/bin/bash
-if [ -e /bin/git ]; then                                                   # check to see if httpd has already been installled
-#@if [ ! -e /bin/git ]; then  (not)                                        # check to see if httpd has already been installled
+if [ -e /bin/git ]; then                                                   # check to see if git has already been installled
    exit 0;                                                                 # exit if it has, because the environment is already installed
 fi
 
