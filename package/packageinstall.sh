@@ -8,7 +8,7 @@ fi
 
 mv packages.txt /etc/packages.txt                                                               # move the file to the appropriate directory
 
-for packages in ($(cat /etc/packages.txt); do                                                   # for each package in the file, install it
+for packages in  $(cat /etc/packages.txt); do                                                   # for each package in the file, install it
   yum -y install $packages;
 done
 
