@@ -2,11 +2,6 @@
 
 echo "starting automate-apache.sh" | logger
 
-# comment out this cond statement before restarting the envoiroment if you want to reinstall
-#if [ -e /usr/sbin/httpd ]; then                                                                           # check to see if httpd has already been installled
-#   exit 0;                                                                                                # exit if it has, because the environment is already installed
-#fi
-
 # get and run custom.sh to install custom functions and aliases
 if [ -e /etc/profile.d/custom.sh ]; then                                                                   # check to see if custom.sh has already been installled
    rm -f /etc/profile.d/custom.sh                                                                          # delete the script so that the new one gets installed
