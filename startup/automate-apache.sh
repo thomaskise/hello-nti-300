@@ -1,5 +1,7 @@
 #! /bin/bash
 
+echo "starting automate-apache.sh"
+
 # comment out this cond statement before restarting the envoiroment if you want to reinstall
 #if [ -e /usr/sbin/httpd ]; then                                                                           # check to see if httpd has already been installled
 #   exit 0;                                                                                                # exit if it has, because the environment is already installed
@@ -15,7 +17,7 @@ fi
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/startup/custom.sh                   # get custom.sh script from github
 mv custom.sh  /etc/profile.d/custom.sh                                                                     # move custom.sh to where it will be executed during startup
 chmod +x /etc/profile.d/custom.sh                                                                          # make script executable
-source /etc/bashrc                                                                                         # run /etc/bashrc which executes the script
+#source /etc/bashrc                                                                                         # run /etc/bashrc which executes the script
 
 # set-up cron job
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/cronjob/automate-cronjob.sh         # get cronjob script from github
