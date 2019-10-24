@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "starting automate-apache.sh"
+echo "starting automate-apache.sh" | logger
 
 # comment out this cond statement before restarting the envoiroment if you want to reinstall
 #if [ -e /usr/sbin/httpd ]; then                                                                           # check to see if httpd has already been installled
