@@ -7,8 +7,6 @@ echo "starting automate-apache.sh" | logger
 #   exit 0;                                                                                                # exit if it has, because the environment is already installed
 #fi
 
-yum -y install httpd mod_ssl                                                                               # install apache and SSL support
-
 # get and run custom.sh to install custom functions and aliases
 if [ -e /etc/profile.d/custom.sh ]; then                                                                   # check to see if custom.sh has already been installled
    rm -f /etc/profile.d/custom.sh                                                                          # delete the script so that the new one gets installed
@@ -31,14 +29,15 @@ chmod +x automate-indexpage.sh                                                  
 ./automate-indexpage.sh                                                                                    # run the script
 rm -f automate-indexpage.sh                                                                                # delete the script
 
-# set up git and clone the repo
-wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/github/automate-github.sh           # get github script from github
-chmod +x automate-github.sh                                                                                # make script executable
-./automate-github.sh                                                                                       # run the script
-rm -f automate-github.sh                                                                                   # delete the script
-
 # get packageinstall.sh and run it to set up packages
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/package/packageinstall.sh           # get packages script from github
 chmod +x packageinstall.sh                                                                                 # make script executable
 ./packageinstall.sh                                                                                        # run the script
 rm -f packageinstall.sh                                                                                    # delete the script
+
+
+# set up git and clone the repo
+wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/github/automate-github.sh           # get github script from github
+chmod +x automate-github.sh                                                                                # make script executable
+./automate-github.sh                                                                                       # run the script
+rm -f automate-github.sh                                                                                   # delete the script
