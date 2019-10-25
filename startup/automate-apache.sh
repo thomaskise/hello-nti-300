@@ -26,9 +26,9 @@ rm -f automate-indexpage.sh                                                     
 
 # get packageinstall.sh and run it to set up packages
 wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/package/packageinstall.sh           # get packages script from github
-chmod +x packageinstall.sh                                                                                 # make script executable
-./packageinstall.sh                                                                                        # run the script
-rm -f packageinstall.sh                                                                                    # delete the script
+# chmod +x packageinstall.sh                                                                                 # make script executable
+# ./packageinstall.sh                                                                                        # run the script
+# rm -f packageinstall.sh                                                                                    # delete the script
 
 
 # set up git and clone the repo
