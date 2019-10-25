@@ -14,9 +14,9 @@ fi
 for input in "$@"                                                                                                             # set for loop condition
 do                                                                                                                            # loop through and process all arguments provided
 
-   test_package=$( yum search installed "$input" | grep "$input"  )                                                           # get current package status 
+   test_package=$( rpm -q $input | grep "not installed"  )                                                                    # get current package status 
 
-   if [ -z "$test_package" ] ; then                                                                                           # if current package is not installed
+   if [ ! -z "$test_package" ] ; then                                                                                         # if current package is installed
      echo $input "package is not installed"                                                                                   # output status message - not installed
      read -p "Install? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 0                       # prompt then continue if condition if y or yes entered (case agnostic); else exit script
      yum -y install $input                                                                                                    # install
