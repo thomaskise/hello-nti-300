@@ -8,9 +8,8 @@ fi
 for input in "$@"
 do
 
-test_package=$( yum search installed "$input" | grep "$input"  ) 
-
-if [ -z "$test_package" ] ; then #my comment here
+test_package=$( rpm -q httpd | grep "not installed" ) 
+if [ -n "$test_package" ] ; then #my comment here
   echo $input "package is not installed"              #prompt for input
   read -p "Install? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 0
   yum -y install $input                  
