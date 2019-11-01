@@ -1,12 +1,11 @@
-
 #!/usr/bin/python
 
 import os
 import re
 import subprocess
 
-os.system ('adduser -m django' +/
-    '&& usermod -L django' +/
+os.system ('adduser -M django' + /
+    '&& usermod -L django' + /
     '&& chown - R django')
 
 def setup_install():
@@ -21,20 +20,20 @@ def setup_install():
     
 def django_install():
     print ('activating virtualenv and installing django after pre-requiirements have been met')
-    os.system('source /opt/django/django-env/bin/activate ' +/
+    os.system('source /opt/django/django-env/bin/activate ' + /
         '&& pip install django')
     os.chdir('/opt/django')
-    os.system('source /opt/django/django-env/bin/activate ' +/
-        '&& django-admin --version ' +/
+    os.system('source /opt/django/django-env/bin/activate ' + /
+        '&& django-admin --version ' + /
         '&& django-admin startproject project1')
 
 def django_start():
     print('starting django')
     os.system('chown -R django /opt/django')
     os.chdir('/opt/django/project1')
-    os.system('source /opt/django/django-env/bin/activate ' +/
+    os.system('source /opt/django/django-env/bin/activate ' + /
         '&& pyuthon manage.py migrate')
-    os.system('source /opt/django/django-env/bin/activate ' +/
+    os.system('source /opt/django/django-env/bin/activate ' + /
         '&& echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(\'admin\', \'admin@newproject.com\', \'pw123456\')" | python manage.py shell')
     outputwithnewline = subprocess.check_output('curl -s checkip.dyndns.org | sed -e \'s/.*Current IP Address: //\' -e \'s/,\<.*$//\' ', shell=True)
     print outputwithnewline
