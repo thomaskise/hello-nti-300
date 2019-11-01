@@ -32,7 +32,7 @@ def django_start():
     os.system('chown -R django /opt/django')
     os.chdir('/opt/django/project1')
     os.system('source /opt/django/django-env/bin/activate ' + \
-        '&& pyuthon manage.py migrate')
+        '&& python manage.py migrate')
     os.system('source /opt/django/django-env/bin/activate ' + \
         '&& echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(\'admin\', \'admin@newproject.com\', \'pw123456\')" | python manage.py shell')
     outputwithnewline = subprocess.check_output('curl -s checkip.dyndns.org | sed -e \'s/.*Current IP Address: //\' -e \'s/<.*$//\'',shell=True)
@@ -47,6 +47,8 @@ def django_start():
         newText=f.read().replace(old_string, new_string)
     with open('project1/settings.py', "w") as f:
         f.write(newText)
+    with open('project1/settings.py') as f:
+        f.close()
 
     os.system('sudo -u django sh -c "source /opt/django/django-env/bin/activate && python manage.py runserver 0.0.0.0:8000&"')
 
