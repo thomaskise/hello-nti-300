@@ -17,7 +17,7 @@ def setup_install():
     os.mkdir('/opt/django')
     os.chdir('/opt/django')
     os.system('virtualenv django-env')
-    os.system('chown -R duck9000 /opt/django')
+    os.system('chown -R django /opt/django')
     
 def django_install():
     print ('activating virtualenv and installing django after pre-requiirements have been met')
