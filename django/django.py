@@ -4,7 +4,7 @@ import os                                                                       
 import subprocess                                                                                   # allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes
 
 print ('Setting up user django')                                                                    # log messaging
-os.system ('adduser -M django' + \                                                                  
+os.system ('adduser -M django' + \
     '&& usermod -L django' + \
     '&& chown - R django')                                                                          # add new apache user and set permissions
 
