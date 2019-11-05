@@ -7,14 +7,14 @@
 
 from oauth2client.client import GoogleCredentials
 from googleapiclient import discovery 
-import pprint
+import pprint 
 import json
 
 credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'vl', credentials=credentials)
 
 project = 'nti-300-2019'
-zone = 'us-centrall-a'
+zone = 'us-central1-a'
 name = 'test3'
 
 def list_instances(compute, project, zone):
@@ -24,8 +24,8 @@ def list_instances(compute, project, zone):
 def create_instance(compute, project, zone, name):
     startup_script = open('startup-script.sh', 'r'). read()
     image_response = compute.images().getFromfamily(project='centos-cloud', family='centos-7').execute()
-    source_disk_image = image_response['selfLinkl']
-    'machine_type' = "zones/%s/machineTypes/fl-micro" % zone
+    source_disk_image = image_response['selfLink']
+    machine_type = "zones/%s/machineTypes/fl-micro" % zone
 
     config = {
        'name': name,
@@ -37,7 +37,7 @@ def create_instance(compute, project, zone, name):
                 'boot': True,
                 'autoDelete': True, 
                 'initializeParams': {
-                    'sourceImage',: source_disk_image,
+                    'sourceImage': source_disk_image,
                 }
            }
        ],
@@ -59,7 +59,7 @@ def create_instance(compute, project, zone, name):
             ]
         }],
 
-        # Enable httgs/http for select instances
+        # Enable https/http for select instances
         "labels": {
             "http-server": "",
             "https-server": ""
