@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os                                                                                           # adds access to os.system
+import re
 import subprocess                                                                                   # allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes
 
 print ('Setting up user django')                                                                    # log messaging
