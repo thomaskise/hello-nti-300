@@ -11,11 +11,11 @@ import pprint
 import json
 
 credentials = GoogleCredentials.get_application_default()
-compute = discovery.build('compute', 'vl', credentials=credentials)
+compute = discovery.build('compute', 'v1', credentials=credentials)
 
-project = 'nti-300-2019'
+project = 'rock-micron-254121'
 zone = 'us-central1-a'
-name = 'test3'
+name = 'djangofinal'
 
 def list_instances(compute, project, zone):
     result = compute.instances().list(project=project, zone=zone).execute()
