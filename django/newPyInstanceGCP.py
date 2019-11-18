@@ -38,6 +38,7 @@ def create_instance(compute, project, zone, name):
                 'autoDelete': True, 
                 'initializeParams': {
                     'sourceImage': source_disk_image,
+                    'diskSizeGb': '50',
                 }
            }
        ],
@@ -77,7 +78,7 @@ def create_instance(compute, project, zone, name):
             'items': [{
                 # Startup script is automatically executed by the instance upon startup
                 'key': 'startup-script',
-                'value': startup_script
+                'value': startup_script,
             }]
         }
     }
