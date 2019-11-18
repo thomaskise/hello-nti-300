@@ -41,14 +41,22 @@ def create_local_repo():
     # make a backup of the nginx.conf file
     os.system('mv nginx.conf nginx.conf.bak')
 
-   # get and move the updated nginx.conf file
+    # get and move the updated nginx.conf file
     os.system('yum -y install wget')
     os.system('wget https://raw.githubusercontent.com/thomaskise/hello-nti-300/master/django/nginx.conf')
     os.system('mv nginx.conf /etc/nginx/nginx.conf')
 
-    #11
-   # restorecon -R /var/www/html
+    # restorecon -R /var/www/html
     os.system('restorecon -R /var/www/html')
+
+    # put SELux in permissive mode
+    os.system('setenforce 0')
+
+    # stop and start nginx
+    os.system('systemctl stop nginx')
+    os.system('systemctl start nginx')
+
+
 
 install_nginx()
 create_local_repo()

@@ -15,7 +15,7 @@ compute = discovery.build('compute', 'v1', credentials=credentials)
 
 project = 'rock-micron-254121'
 zone = 'us-central1-a'
-name = 'djangofinal'
+name = 'thoms-mirror'
 
 def list_instances(compute, project, zone):
     result = compute.instances().list(project=project, zone=zone).execute()
