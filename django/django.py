@@ -31,6 +31,7 @@ def update_repolist():                                                          
         with open(local_repo_file) as f:                                                            # close the file
                 f.close()
         i += 1
+    os.system('chmod 755 /etc/yum.repos.d/local-repos.repo')
     # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
     filename = '/etc/yum.repos.d/epel.repo'
     text_to_search = 'enabled=1'
