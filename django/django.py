@@ -13,22 +13,22 @@ os.system ('adduser -M django' + \
 def update_repolist():                                                                              # enable local repo and disable external
     print ('********** updating the repolist')
     # enable the local repo by adding /etc/yum.repos.d/local-repos.repo
-    local_repo_file = [
+    file_content = [
         '[local-epel]',
         'name=NTI300 EPEL',
         'baseurl=http://34.68.43.152/epel/',
         'gpgcheck=0',
-        'enabled=1',
-        'vim /etc/yum.repos.d/local-repos.repo'
+        'enabled=1'
         ]
     
-    f = open('/etc/yum.repos.d/local-repos.repo',"w+")                                                  # open the file for input. Create it if it does not exist
+    local_repo_file='/etc/yum.repos.d/local-repos.repo'
+    f = open(local_repo_file,"w+")                                                                  # open the file for input. Create it if it does not exist
     i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
-    while i < len(django_config_file):                                                              # do while until the array is fully processed
-        newLine = django_config_file[i] + '\n'                                                      # assign new line the value of the current array item and add eol indicator
-        with open('/etc/yum.repos.d/local-repos.repo', "a") as f:                                       # open the file to append
+    while i < len(file_content):                                                                 # do while until the array is fully processed
+        newLine = file_content[i] + '\n'                                                         # assign new line the value of the current array item and add eol indicator
+        with open(local_repo_file, "a") as f:                                                       # open the file to append
                 f.write(newLine)                                                                    # write the new line
-        with open('/etc/yum.repos.d/local-repos.repo') as f:                                            # close the file
+        with open(local_repo_file) as f:                                                            # close the file
                 f.close()
         i += 1
     # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
