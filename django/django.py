@@ -3,11 +3,44 @@
 import os                                                                                           # adds access to os.system
 import subprocess                                                                                   # allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes
 import re
+import fileinput
 
 print ('********** Setting up user django')                                                         # log messaging
 os.system ('adduser -M django' + \
     '&& usermod -L django' + \
-    '&& chown - R django')                                                                          # add new apache user and set permissions
+    '&& chown -R django')                                                                           # add new apache user and set permissions
+    
+def update_repolist():                                                                              # enable local repo and disable external
+    print ('********** updating the repolist')
+    # enable the local repo by adding /etc/yum.repos.d/local-repos.repo
+    local_repo_file = [
+        '[local-epel]',
+        'name=NTI300 EPEL',
+        'baseurl=http://34.68.43.152/epel/',
+        'gpgcheck=0',
+        'enabled=1',
+        'vim /etc/yum.repos.d/local-repos.repo'
+        ]
+    
+    f = open('/etc/yum.repos.d/local-repos.repo',"w+")                                                  # open the file for input. Create it if it does not exist
+    i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
+    while i < len(django_config_file):                                                              # do while until the array is fully processed
+        newLine = django_config_file[i] + '\n'                                                      # assign new line the value of the current array item and add eol indicator
+        with open('/etc/yum.repos.d/local-repos.repo', "a") as f:                                       # open the file to append
+                f.write(newLine)                                                                    # write the new line
+        with open('/etc/yum.repos.d/local-repos.repo') as f:                                            # close the file
+                f.close()
+        i += 1
+    # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
+    filename = '/etc/yum.repos.d/epel.repo'
+    text_to_search = 'enabled=1'
+    replacement_text = 'enabled=0'
+    s = open(filename).read()
+    s = s.replace(text_to_search,replacement_text)
+    f = open(filename, 'w')
+    f.write(s)
+    f.close()
+
 
 def setup_install():
     print ('********** installing pip & virtualenv so we can give django its own ver of python')    # log messaging
@@ -107,6 +140,7 @@ def setup_mod_wsgi():
 
 
 # run the install and start functions
+update_repolist()
 setup_install()
 django_install()
 django_start()    
