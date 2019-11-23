@@ -9,24 +9,30 @@ print ('********** Setting up user django')                                     
 os.system ('adduser -M django' + \
     '&& usermod -L django' + \
     '&& chown -R django')                                                                           # add new apache user and set permissions
-
-
-def local_repo():
-    print ('********** adding local repo')
-    repo="""[local-epel]
-        name=NTI300 EPEL
-        baseurl=http://35.223.150.249/epel/
-        gpgcheck=0
-        enabled=1"""
-    os.system('for file in $( ls /etc/yum.repos.d/ ); do mv /etc/yum.repos.d/$file /etc/yum.repos.d/$file.bak; done')
-    print(repo)
-    with open("/etc/yum.repos.d/local-repo.repo","w+") as f:
-      f.write(repo)
-    f.close()
-
-def external_repo():                                                                              # enable local repo and disable external
-    print ('********** updating external repo')
+    
+def update_repolist():                                                                              # enable local repo and disable external
+    print ('********** updating the repolist')
+    # enable the local repo by adding /etc/yum.repos.d/local-repos.repo
+    file_content = [
+        '[local-epel]',
+        'name=NTI300 EPEL',
+        'baseurl=http://34.68.43.152/epel/',
+        'gpgcheck=0',
+        'enabled=1'
+        ]
+    
+    local_repo_file='/etc/yum.repos.d/local-repos.repo'
+    f = open(local_repo_file,"w+")                                                                  # open the file for input. Create it if it does not exist
+    i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
+    while i < len(file_content):                                                                    # do while until the array is fully processed
+        newLine = file_content[i] + '\n'                                                            # assign new line the value of the current array item and add eol indicator
+        with open(local_repo_file, "a") as f:                                                       # open the file to append
+                f.write(newLine)                                                                    # write the new line
+        with open(local_repo_file) as f:                                                            # close the file
+                f.close()
+        i += 1
     os.system('chmod 755 /etc/yum.repos.d/local-repos.repo')
+
     # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
     filename = '/etc/yum.repos.d/epel.repo'
     text_to_search = 'enabled=1'
@@ -40,7 +46,7 @@ def external_repo():                                                            
 
 def setup_install():
     print ('********** installing pip & virtualenv so we can give django its own ver of python')    # log messaging
-    os.system('yum -y install python-pip mod_wsgi && pip install --upgrade pip')              # install python httpd mod_wsgi and then upgrade python to latest version
+    os.system('yum -y install python-pip mod_wsgi && pip install --upgrade pip')                    # install python mod_wsgi and then upgrade python to latest version
     os.system('pip install virtualenv')                                                             # install virual environemtn manager
     os.chdir('/opt')                                                                                # change to the directory created during install
     os.mkdir('/opt/django')                                                                         # create a directory for django virtualenv
@@ -136,8 +142,7 @@ def setup_mod_wsgi():
 
 
 # run the install and start functions
-local_repo()
-external_repo()
+update_repolist()
 setup_install()
 django_install()
 django_start()    
