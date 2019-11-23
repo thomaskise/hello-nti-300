@@ -134,8 +134,8 @@ def setup_mod_wsgi():
     os.system('usermod -a -G django apache')                                                        # be sure this is in the django group
     os.system('chmod 710 /opt/django')
     os.system('chmod 664 /opt/django/project1/db.sqlite3')
-    os.system('chown -R :apache /opt/django/project1/db.sqlite3')
-    os.system('chown -R :apache /opt/django')
+    os.system('chown :apache /opt/django/project1/db.sqlite3')
+    os.system('chown :apache /opt/django')
     os.system('systemctl start httpd')
     os.system('systemctl enable httpd')
 
