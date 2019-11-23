@@ -45,7 +45,7 @@ def update_repolist():                                                          
 
 def setup_install():
     print ('********** installing pip & virtualenv so we can give django its own ver of python')    # log messaging
-    os.system('yum -y install python-pip httpd mod_wsgi && pip install --upgrade pip')              # install python httpd mod_wsgi and then upgrade python to latest version
+    os.system('yum -y install python-pip mod_wsgi && pip install --upgrade pip')              # install python httpd mod_wsgi and then upgrade python to latest version
     os.system('pip install virtualenv')                                                             # install virual environemtn manager
     os.chdir('/opt')                                                                                # change to the directory created during install
     os.mkdir('/opt/django')                                                                         # create a directory for django virtualenv
