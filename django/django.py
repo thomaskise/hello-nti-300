@@ -21,17 +21,17 @@ def update_repolist():                                                          
         'enabled=1'
         ]
     
-    local_repo_file='/etc/yum.repos.d/local-repos.repo'
-    f = open(local_repo_file,"w+")                                                                  # open the file for input. Create it if it does not exist
-    i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
-    while i < len(file_content):                                                                    # do while until the array is fully processed
-        newLine = file_content[i] + '\n'                                                            # assign new line the value of the current array item and add eol indicator
-        with open(local_repo_file, "a") as f:                                                       # open the file to append
-                f.write(newLine)                                                                    # write the new line
-        with open(local_repo_file) as f:                                                            # close the file
-                f.close()
-        i += 1
-    os.system('chmod 755 /etc/yum.repos.d/local-repos.repo')
+    # local_repo_file='/etc/yum.repos.d/local-repos.repo'
+    # f = open(local_repo_file,"w+")                                                                  # open the file for input. Create it if it does not exist
+    # i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
+    # while i < len(file_content):                                                                    # do while until the array is fully processed
+    #     newLine = file_content[i] + '\n'                                                            # assign new line the value of the current array item and add eol indicator
+    #     with open(local_repo_file, "a") as f:                                                       # open the file to append
+    #             f.write(newLine)                                                                    # write the new line
+    #     with open(local_repo_file) as f:                                                            # close the file
+    #             f.close()
+    #     i += 1
+    # os.system('chmod 755 /etc/yum.repos.d/local-repos.repo')
 
     # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
     filename = '/etc/yum.repos.d/epel.repo'
