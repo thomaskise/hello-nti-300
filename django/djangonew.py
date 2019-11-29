@@ -3,50 +3,37 @@
 import os                                                                                           # adds access to os.system
 import subprocess                                                                                   # allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes
 import re
-import fileinput
 
 print ('********** Setting up user django')                                                         # log messaging
 os.system ('adduser -M django' + \
     '&& usermod -L django' + \
     '&& chown -R django')                                                                           # add new apache user and set permissions
     
-def update_repolist():                                                                              # enable local repo and disable external
-    print ('********** updating the repolist')
-    # enable the local repo by adding /etc/yum.repos.d/local-repos.repo
-    file_content = [
-        '[local-epel]',
-        'name=NTI300 EPEL',
-        'baseurl=http://34.68.43.152/epel/',
-        'gpgcheck=0',
-        'enabled=1',
-        'vim /etc/yum.repos.d/local-repos.repo'
-        ]
-    
-    local_repo_file='/etc/yum.repos.d/local-repos.repo'
-    f = open(local_repo_file,"w+")                                                                  # open the file for input. Create it if it does not exist
-    i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
-    while i < len(file_content):                                                                    # do while until the array is fully processed
-        newLine = file_content[i] + '\n'                                                            # assign new line the value of the current array item and add eol indicator
-        with open(local_repo_file, "a") as f:                                                       # open the file to append
-                f.write(newLine)                                                                    # write the new line
-        with open(local_repo_file) as f:                                                            # close the file
-                f.close()
-        i += 1
-    os.system('chmod 755 /etc/yum.repos.d/local-repos.repo')
-    # now we disable the external repos by updating /etc/yum.repos.d/epel.repo
-    filename = '/etc/yum.repos.d/epel.repo'
-    text_to_search = 'enabled=1'
-    replacement_text = 'enabled=0'
-    s = open(filename).read()
-    s = s.replace(text_to_search,replacement_text)
-    f = open(filename, 'w')
-    f.write(s)
+def local_repo():
+    repo="""[local-epel]
+name=NTI300 EPEL
+baseurl=http://35.223.150.249/epel/
+gpgcheck=0
+enabled=1"""
+    print(repo)
+    with open("/etc/yum.repos.d/local-repo.repo","w+") as f:
+      f.write(repo)
+    f.close()
+        
+    on="enabled=1"
+    off="enabled=0"
+
+    with open('/etc/yum.repos.d/epel.repo') as f:
+      dissablerepo=f.read().replace(on, off)
     f.close()
 
+    with open('/etc/yum.repos.d/epel.repo', "w") as f:
+      f.write(dissablerepo)
+    f.close()
 
 def setup_install():
     print ('********** installing pip & virtualenv so we can give django its own ver of python')    # log messaging
-    os.system('yum -y install python-pip httpd mod_wsgi && pip install --upgrade pip')              # install python httpd mod_wsgi and then upgrade python to latest version
+    os.system('yum -y install python-pip && pip install --upgrade pip')                             # install python and then upgrade python to latest version
     os.system('pip install virtualenv')                                                             # install virual environemtn manager
     os.chdir('/opt')                                                                                # change to the directory created during install
     os.mkdir('/opt/django')                                                                         # create a directory for django virtualenv
@@ -90,61 +77,9 @@ def django_start():
         f.close()                                                                                   # close the settings.py file
     os.system('sudo -u django sh -c "source /opt/django/django-env/bin/activate && python manage.py runserver 0.0.0.0:8000&"')
                                                                                                     # activate and start python
-def setup_mod_wsgi():
-    print('********** setup mod wsgi install')                                                      # log messaging
-
-    os.chdir('/opt/django/project1')                                                                # change into the project directory
-    
-    # update settings.py
-    new_string = 'STATIC_ROOT = os.path.join(BASE_DIR, "static/")' + '\n'                           # define the new line
-    print (new_string)                                                                              # log the new value
-
-    with open('project1/settings.py', "a") as f:                                                    # open file for append
-        f.write(new_string)                                                                         # append the new line
-    with open('project1/settings.py') as f:                                                         # close the file
-        f.close()
-    print('********** settings.py updated')
-    # update the django.conf file for httpd
-    # define django.conf file content as an array
-    django_config_file = [
-        'Alias /static /opt/django/project1/static/',
-        '<Directory /opt/django/project1/static/>',
-        '    Require all granted',
-        '</Directory>',
-        '<Directory /opt/django/project1/project1>',
-        '    <Files wsgi.py>',
-        '        Require all granted',
-        '    </Files>',
-        '</Directory>',
-        'WSGIDaemonProcess project1 python-path=/opt/django/project1:/opt/django/django-env/lib/python2.7/site-packages/',
-        'WSGIProcessGroup project1',
-        'WSGIScriptAlias / /opt/django/project1/project1/wsgi.py'
-        ]
-    
-    f = open('/etc/httpd/conf.d/django.conf',"w+")                                                  # open the file for input. Create it if it does not exist
-    i = 0                                                                                           # set i to zero to start the while loop at the begining of the content array
-    while i < len(django_config_file):                                                              # do while until the array is fully processed
-        newLine = django_config_file[i] + '\n'                                                      # assign new line the value of the current array item and add eol indicator
-        with open('/etc/httpd/conf.d/django.conf', "a") as f:                                       # open the file to append
-                f.write(newLine)                                                                    # write the new line
-        with open('/etc/httpd/conf.d/django.conf') as f:                                            # close the file
-                f.close()
-        i += 1                                                                                      # increment the loop counter
-    print('********** django.conf updated')
-    
-    os.system('usermod -a -G django apache')                                                        # be sure this is in the django group
-    os.system('chmod 710 /opt/django')
-    os.system('chmod 664 /opt/django/project1/db.sqlite3')
-    os.system('chown :apache /opt/django/project1/db.sqlite3')
-    os.system('chown :apache /opt/django')
-    os.system('systemctl start httpd')
-    os.system('systemctl enable httpd')
-
-
 # run the install and start functions
-update_repolist()
+local_repo()
 setup_install()
 django_install()
 django_start()    
-setup_mod_wsgi()
 print ('********** django.py complete')                                                             # log completion
