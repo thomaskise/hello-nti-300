@@ -12,7 +12,7 @@ os.system ('adduser -M django' + \
 def local_repo():
     repo="""[local-epel]
 name=NTI300 EPEL
-baseurl=http://35.223.150.249/epel/
+baseurl=http://34.68.43.152/epel/
 gpgcheck=0
 enabled=1"""
     print(repo)
